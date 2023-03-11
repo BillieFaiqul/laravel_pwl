@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1> Hobi</h1>
+            <h1>MataKuliah</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Hobi Page</li>
+              <li class="breadcrumb-item active">MataKuliah</li>
             </ol>
           </div>
         </div>
@@ -22,7 +22,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Hobi</h3>
+          <h3 class="card-title">MataKuliah</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
@@ -36,13 +36,15 @@
             <table class="table table-bordered tabel-hover">
                 <thead>
                     <tr>
-                        <td>Hobi</td>
+                        <td>Nama MataKuliah</td>
+                        <td>Hari</td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($hobis as $a)
+                    @foreach ($matakuliah as $a)
                         <tr>
-                            <td>{{ $a->hobi}}</td>
+                            <td>{{ $a->nama_matakuliah }}</td>
+                            <td>{{ $a->hari }}</td>
                         </tr>
                     @endforeach
                 </tbody>

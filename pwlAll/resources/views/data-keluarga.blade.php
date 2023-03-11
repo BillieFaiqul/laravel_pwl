@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1> Hobi</h1>
+            <h1>Data Keluarga</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Hobi Page</li>
+              <li class="breadcrumb-item active">Data Keluarga</li>
             </ol>
           </div>
         </div>
@@ -22,7 +22,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Hobi</h3>
+          <h3 class="card-title">Data Keluarga</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
@@ -36,13 +36,23 @@
             <table class="table table-bordered tabel-hover">
                 <thead>
                     <tr>
-                        <td>Hobi</td>
+                        <td>Nama</td>
+                        <td>Jenis Kelamin</td>
+                        <td>Tanggal Lahir</td>
+                        <td>Agama</td>
+                        <td>Pekerjaan</td>
+                        <td>Status</td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($hobis as $a)
+                    @foreach ($keluargas as $a)
                         <tr>
-                            <td>{{ $a->hobi}}</td>
+                            <td>{{ $a->nama}}</td>
+                            <td>{{ $a->jenis_kelamin}}</td>
+                            <td>{{ $a->tanggal_lahir}}</td>
+                            <td>{{ $a->agama}}</td>
+                            <td>{{ $a->pekerjaan}}</td>
+                            <td>{{ $a->status}}</td>
                         </tr>
                     @endforeach
                 </tbody>
