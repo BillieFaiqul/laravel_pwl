@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use App\Models\Artikel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ArtikelSeeder extends Seeder
 {
@@ -15,6 +16,25 @@ class ArtikelSeeder extends Seeder
     public function run()
     {
         //
-        Artikel::factory(40)->create();
+        DB::table('artikels')->insert([
+            [
+                'id' => 1,
+                'judul' => 'Menegangkan!',
+                'penulis' => 'Haikal',
+                'tanggal_publish' => '2023-01-07'
+            ],
+            [
+                'id' => 2,
+                'judul' => 'Mengejutkan!',
+                'penulis' => 'Diouf',
+                'tanggal_publish' => '2023-02-07'
+            ],
+            [
+                'id' => 3,
+                'judul' => 'Mengerikan!',
+                'penulis' => 'Haikal',
+                'tanggal_publish' => '2023-03-07'
+            ]
+        ]);
     }
 }

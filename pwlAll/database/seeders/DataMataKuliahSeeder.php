@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class HobiSeeder extends Seeder
+class DataMataKuliahSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,18 +16,21 @@ class HobiSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('hobis')->insert([
+        DB::table('data_mata_kulias')->insert([
             [
                 'id' => 1,
-                'hobi' => 'Batminton',
+                'nama_matakuliah' => 'Kewarganegaraan',
+                'hari'=>'Rabu'
             ],
             [
                 'id' => 2,
-                'hobi' => 'Volly',
+                'nama_matakuliah' => 'Proyek 1',
+                'hari'=>'Senin'
             ],
             [
                 'id' => 3,
-                'hobi' => 'Futsal',
+                'nama_matakuliah' => 'Management Proyek',
+                'hari'=>'Selasa'
             ]
         ]);
     }
