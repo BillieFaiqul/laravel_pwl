@@ -42,7 +42,7 @@
                 <tbody>
                     @foreach ($hobis as $a)
                         <tr>
-                            <td>{{ $a->hobi}}</td>
+                            <td>{{ $a->Hobi}}</td>
                         </tr>
                     @endforeach
                 </tbody>
