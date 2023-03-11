@@ -55,3 +55,4 @@ Route::get('/kuliah', [KuliahController::class, 'index']);
 
 Route::get('/artikel', [ArtikelController::class, 'index']);
 
+
