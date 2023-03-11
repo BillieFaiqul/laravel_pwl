@@ -8,8 +8,8 @@ class ProfileController extends Controller
 {
     function index() {
         return view('profile')
-                    ->with('nama', 'Muhammad Aqilul Muttaqin')
+                    ->with('nama', 'Billie Faiqul Izzat')
                     ->with('kelas', 'TI-2A')
-                    ->with('nim', 2141720182);
+                    ->with('nim', 2141720051);
     }
 }

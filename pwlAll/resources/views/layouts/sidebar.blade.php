@@ -54,7 +54,31 @@
             <a href="kuliah" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Kuliah
+                History Kuliah
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="hobi" class="nav-link">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                Hobi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="matakuliah" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Data MataKuliah
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="keluarga" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Data Keluarga
               </p>
             </a>
           </li>
