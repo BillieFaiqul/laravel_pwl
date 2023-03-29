@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProgramController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\DataMataKuliaController;
 use App\Http\Controllers\HobiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KuliahController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,15 @@ use App\Http\Controllers\KuliahController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+
+
+
+Auth::routes();
+Route::get('logout', [LoginController::class, 'logout']);
+
+Route::middleware(['auth'])->group(function(){
+    //semua url selain Auth dan logout
+    Route::get('/', [HomeController::class, 'index']);
 
 Route::prefix('product')->group(function() {
     Route::get('/marbel', [ProductController::class, 'index']);
@@ -63,5 +73,8 @@ Route::get('/hobi', [HobiController::class, 'index']);
 Route::get('/matakuliah', [DataMataKuliaController::class, 'index']);
 
 Route::get('/keluarga' , [DataKeluargaController::class, 'index']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
 
