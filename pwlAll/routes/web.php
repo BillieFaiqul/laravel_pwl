@@ -14,6 +14,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataKeluargaController;
 use App\Http\Controllers\DataMataKuliaController;
+use App\Http\Controllers\DataMatakuliahController;
 use App\Http\Controllers\HobiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KuliahController;
@@ -69,11 +70,11 @@ Route::get('/kuliah', [KuliahController::class, 'index']);
 
 Route::get('/artikel', [ArtikelController::class, 'index']);
 
-Route::get('/hobi', [HobiController::class, 'index']);
+Route::resource('/hobi', HobiController::class);
 
-Route::get('/matakuliah', [DataMataKuliaController::class, 'index']);
+Route::resource('/matakuliah', DataMatakuliahController::class);
 
-Route::get('/keluarga' , [DataKeluargaController::class, 'index']);
+Route::resource('/keluarga' , DataKeluargaController::class);
 
 Route::resource('/mahasiswa', MahasiswaController::class);
 

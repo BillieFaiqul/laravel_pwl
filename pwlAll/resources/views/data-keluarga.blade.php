@@ -33,30 +33,50 @@
           </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered tabel-hover">
-                <thead>
-                    <tr>
-                        <td>Nama</td>
-                        <td>Jenis Kelamin</td>
-                        <td>Tanggal Lahir</td>
-                        <td>Agama</td>
-                        <td>Pekerjaan</td>
-                        <td>Status</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($keluargas as $a)
-                        <tr>
-                            <td>{{ $a->nama}}</td>
-                            <td>{{ $a->jenis_kelamin}}</td>
-                            <td>{{ $a->tanggal_lahir}}</td>
-                            <td>{{ $a->agama}}</td>
-                            <td>{{ $a->pekerjaan}}</td>
-                            <td>{{ $a->status}}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
+          <a href="{{url('keluarga/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Jenis Kelamin</th>
+                <th>Tanggal Lahir</th>
+                <th>Agama</th>
+                <th>Pekerjaan</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if($dk->count() > 0)
+                @foreach($dk as $i => $k)
+                  <tr>
+                    <td>{{++$i}}</td>
+                    <td>{{$k->nama}}</td>
+                    <td>{{$k->jenis_kelamin}}</td>
+                    <td>{{$k->tanggal_lahir}}</td>
+                    <td>{{$k->agama}}</td>
+                    <td>{{$k->pekerjaan}}</td>
+                    <td>{{$k->status}}</td>
+                    <td>
+                      <!-- Bikin tombol edit dan delete -->
+                      <a href="{{ url('/keluarga/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+
+                      <form method="POST" action="{{ url('/keluarga/'.$k->id) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+              @else
+                <tr><td colspan="6" class="text-center">Data tidak ada</td></tr>
+              @endif
+            </tbody>
+          </table>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

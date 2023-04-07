@@ -33,20 +33,40 @@
           </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered tabel-hover">
-                <thead>
-                    <tr>
-                        <td>Hobi</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($hobis as $a)
-                        <tr>
-                            <td>{{ $a->Hobi}}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
+          <a href="{{url('hobi/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Hobi</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if($hb->count() > 0)
+                @foreach($hb as $i => $h)
+                  <tr>
+                    <td>{{++$i}}</td>
+                    <td>{{$h->Hobi}}</td>
+                    <td>
+                      <!-- Bikin tombol edit dan delete -->
+                      <a href="{{ url('/hobi/'. $h->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+
+                      <form method="POST" action="{{ url('/hobi/'.$h->id) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+              @else
+                <tr><td colspan="6" class="text-center">Data tidak ada</td></tr>
+              @endif
+            </tbody>
+          </table>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

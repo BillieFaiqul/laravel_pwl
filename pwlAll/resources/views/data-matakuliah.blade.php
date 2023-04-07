@@ -33,22 +33,42 @@
           </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered tabel-hover">
-                <thead>
-                    <tr>
-                        <td>Nama MataKuliah</td>
-                        <td>Hari</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($matakuliah as $a)
-                        <tr>
-                            <td>{{ $a->nama_matakuliah }}</td>
-                            <td>{{ $a->hari }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
+          <a href="{{url('matakuliah/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>MataKuliah</th>
+                <th>Hari</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if($mk->count() > 0)
+                @foreach($mk as $i => $m)
+                  <tr>
+                    <td>{{++$i}}</td>
+                    <td>{{$m->nama_matakuliah}}</td>
+                    <td>{{$m->hari}}</td>
+                    <td>
+                      <!-- Bikin tombol edit dan delete -->
+                      <a href="{{ url('/matakuliah/'. $m->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+
+                      <form method="POST" action="{{ url('/matakuliah/'.$m->id) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+              @else
+                <tr><td colspan="6" class="text-center">Data tidak ada</td></tr>
+              @endif
+            </tbody>
+          </table>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
