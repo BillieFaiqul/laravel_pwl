@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\DataKeluarga;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +24,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            ArtikelSeeder::class
+            //ArtikelSeeder::class,
+            DataKeluargaSeeder::class,
+            DataMataKuliahSeeder::class,
+            HobiSeeder::class,
+            UserSeeder::class,
+            TransaksiSeeder::class
         ]);
     }
 }

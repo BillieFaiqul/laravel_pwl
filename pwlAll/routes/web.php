@@ -19,6 +19,7 @@ use App\Http\Controllers\HobiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KuliahController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -77,6 +78,8 @@ Route::resource('/matakuliah', DataMatakuliahController::class);
 Route::resource('/keluarga' , DataKeluargaController::class);
 
 Route::resource('/mahasiswa', MahasiswaController::class);
+
+Route::resource('/transaksi', TransaksiController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
