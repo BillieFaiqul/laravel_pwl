@@ -48,13 +48,31 @@
                 <span class="error invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="form-gorup">
-                <label>Jenis Kelamin</label>
-                <input class="form-control @error('jk') is-invalid @enderror" value="{{ isset($mhs)? $mhs->jk : old('jk') }}" name="jk" type="text" >
-                @error('jk')
+            @if (isset($mhs))
+            <div class="form-group">
+              <label>Jenis Kelamin</label>
+              <select class="form-control" @error('jk') is-invalid @enderror name="jk">
+                <option value="">--Pilih Jenis Kelamin--</option>
+                <option value="l" {{ $mhs->jk == 'l'? 'selected' : '' }}>Laki-laki</option>
+                <option value="p" {{ $mhs->jk == 'p'? 'selected' : '' }}>Perempuan</option>
+              </select>
+              @error('jk')
                 <span class="error invalid-feedback">{{ $message }}</span>
-                @enderror
+              @enderror
             </div>
+            @else 
+            <div class="form-group">
+              <label>Jenis Kelamin</label>
+              <select class="form-control" @error('jk') is-invalid @enderror name="jk">
+                <option value="">--Pilih Jenis Kelamin--</option>
+                <option value="l">Laki-laki</option>
+                <option value="p">Perempuan</option>
+              </select>
+              @error('jk')
+                <span class="error invalid-feedback">{{ $message }}</span>
+              @enderror
+            </div>
+            @endif
             <div class="form-gorup">
                 <label>Tempat Lahir</label>
                 <input class="form-control @error('tempat_lahir') is-invalid @enderror" value="{{ isset($mhs)? $mhs->tempat_lahir : old('tempat_lahir') }}" name="tempat_lahir" type="text">
@@ -83,12 +101,20 @@
                 <span class="error invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-sm btn-success my-2">Submit</button>
+            <div class="form-group">
+              <label for="Kelas">Kelas</label>
+              <select class="form-control @error('kelas') is-invalid @enderror" value="{{ isset($mhs)? $mhs->kelas : old('kelas')}}" name="kelas" >
+                 @foreach($kelas as $kls)
+                    <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
+                 @endforeach
+              </select>
+           </div>
+           <button type="submit" class="btn btn-sm btn-success my-2">Submit</button>
         </form>
       </div>
       <!-- /.card-body -->
       <div class="card-footer">
-        
+
       </div>
       <!-- /.card-footer-->
     </div>

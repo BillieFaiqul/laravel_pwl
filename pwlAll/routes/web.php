@@ -81,6 +81,8 @@ Route::resource('/mahasiswa', MahasiswaController::class);
 
 Route::resource('/transaksi', TransaksiController::class);
 
+Route::get('/mahasiswa/{id}/khs', [MahasiswaController::class, 'showKhs'])->name('showKhs');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
