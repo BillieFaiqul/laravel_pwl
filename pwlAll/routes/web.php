@@ -59,8 +59,6 @@ Route::resource('contactus', ContactUsController::class);
 
 Route::get('/about', [AboutController::class, 'index']);
 
-Route::get('/articles/{id}', [ArticleController::class, 'index']);
-
 //Jobsheet 3 Prak 2
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -82,6 +80,8 @@ Route::resource('/mahasiswa', MahasiswaController::class);
 Route::resource('/transaksi', TransaksiController::class);
 
 Route::get('/mahasiswa/{id}/khs', [MahasiswaController::class, 'showKhs'])->name('showKhs');
+
+Route::resource('articles', ArticleController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
