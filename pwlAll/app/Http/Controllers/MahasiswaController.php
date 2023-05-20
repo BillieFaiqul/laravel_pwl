@@ -6,6 +6,10 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use App\Models\MahasiswaMatakuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use PDF;
 use PDO;
 
 class MahasiswaController extends Controller
@@ -49,6 +53,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required|string|max:10|unique:mahasiswa,nim',
             'nama' => 'required|string|max:50',
+            'foto' => 'requared|image|max:2048',
             'jk' => 'required|in:l,p',
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
@@ -56,9 +61,14 @@ class MahasiswaController extends Controller
             'hp' => 'required|digits_between:6,15',
         ]);
 
+        $imageName = time().'.'.$request->foto->extension();  
+        $request->foto->move(public_path('storage'), $imageName);
+
+
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
+        $mahasiswa->foto = $imageName;
         $mahasiswa->jk = $request->get('jk');
         $mahasiswa->tempat_lahir = $request->get('tempat_lahir');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
@@ -124,6 +134,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required|string|max:10|unique:mahasiswa,nim,'.$id,
             'nama' => 'required|string|max:50',
+            'foto' => 'required',
             'jk' => 'required|in:l,p',
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
@@ -139,6 +150,22 @@ class MahasiswaController extends Controller
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
         $mahasiswa->alamat = $request->get('alamat');
         $mahasiswa->hp = $request->get('hp');
+        $mahasiswa->save();
+
+        if($request->file('foto')){
+            // hapus foto lama jika ada foto baru yang diupload
+            if($mahasiswa->foto && file_exists(storage_path('app/public/'.$mahasiswa->foto))){
+                Storage::delete('public/'.$mahasiswa->foto);
+            }
+            // simpan foto baru ke direktori penyimpanan
+            $file = $request->file('foto');
+            $nama_file = $file->getClientOriginalName();
+            $file->storeAs('public/foto', $nama_file);
+            // simpan nama file foto ke dalam kolom 'foto' pada tabel 'mahasiswas'
+            $mahasiswa->foto = $nama_file;
+        }              
+        $image_name = $request->file('foto')->store('images', 'public');
+        $mahasiswa->foto = $image_name;
 
         $kelas = new Kelas;
         $kelas->id = $request->get('kelas');
@@ -159,5 +186,18 @@ class MahasiswaController extends Controller
     {
         Mahasiswa::where('id', '=', $id)->delete();
         return redirect('mahasiswa')->with('success', 'Mahasiswa Berhasil Dihapus');
+    }
+
+    public function exportPDF($nim)
+    {
+        $mahasiswa = Mahasiswa::with('matakuliah')->where('nim', $nim)->first();
+        $nilai = DB::table('mahasiswa_matakuliah')
+                    ->join('matakuliah', 'matakuliah.id', '=', 'mahasiswa_matakuliah.matakuliah_id')
+                    ->where('mahasiswa_matakuliah.mahasiswa_id', $nim)
+                    ->select('nilai')
+                    ->get();
+        $pdf = PDF::loadView('mahasiswa.nilai_pdf', ['mahasiswa' => $mahasiswa, 'nilai' => $nilai]);
+        return $pdf->download('KHS-' . $mahasiswa->nama . '.pdf');
+        
     }
 }

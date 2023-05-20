@@ -85,6 +85,8 @@ Route::resource('articles', ArticleController::class);
 
 Route::get('/article/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
 
+Route::get('/mahasiswa/{nim}/exportPDF', [MahasiswaController::class, 'exportPDF'])->name('mahasiswa.exportPDF');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 

@@ -20,18 +20,14 @@
                 <td><b>Semester</b></td>
                 <td><b>Nilai</b></td>
             </thead>
-            @foreach($khs as $k)
+            @foreach ($mahasiswa->matakuliah as $mhs)
             <tr>
-                <td>{{ $k->matakuliah->nama_matkul }}</td>
-                <td>{{ $k->matakuliah->sks }}</td>
-                <td>{{ $k->matakuliah->semester }}</td>
-                <td>{{ $k->nilai }}</td>
+                <td>{{ $mhs->matakuliah->nama_matkul }}</td>
+                <td>{{ $mhs->matakuliah->sks }}</td>
+                <td>{{ $mhs->matakuliah->semester }}</td>
+                <td>{{ $mhs->nilai }}</td>
             </tr>
             @endforeach
         </table>
-        <div class="text-center mt-5">
-            <a class="btn btn-primary" href="{{ route('mahasiswa.exportPDF', $mahasiswa->nim) }}" target="_blank">Cetak ke PDF</a>
-        </div>
-        <a href="/mahasiswa" class="btn btn-success">Kembali</a>
     </div>
 </html>
